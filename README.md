@@ -1,1 +1,1 @@
-This is the initial version of some useful javascrip extensions that do not pollute the global namespace.
+This is the initial version of some useful javascript extensions that do not pollute the global namespace.
