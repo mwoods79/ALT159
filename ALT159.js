@@ -19,7 +19,7 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-ALT159 = \u0159 = f = (function(obj) {
+ALT159 = \u0192 = f = (function(obj) {
 
 	var stringy = function(obj) {
 		this.stringy = obj;
