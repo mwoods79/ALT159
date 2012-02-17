@@ -31,6 +31,23 @@ ALT159 = \u0192 = f = (function(obj) {
 		return word;
 	};
 
+  // Returns only the numbers out of a string
+	stringy.prototype.numbers = function() {
+    var n = parseFloat(this.stringy.replace(/[^0-9.-]+/g, ""));
+		return isNaN(n) ? null: n;
+  }
+
+  // C style format method
+  stringy.prototype.format = function () {
+    console.log(arguments)
+    var formatted = this.stringy;
+    for (var i = 0; i < arguments.length; i++) {
+      var regexp = new RegExp('\\{' + i + '\\}', 'gi');
+      formatted = formatted.replace(regexp, arguments[i]);
+    }
+    return formatted;
+  };
+
 	var ALT159 = function(obj) {
 		if (typeof obj === "string") {
 			return new stringy(obj);
