@@ -31,6 +31,11 @@ ALT159 = \u0192 = f = (function(obj) {
 		return word;
 	};
 
+	stringy.prototype.numbers = function() {
+    var n = parseFloat(this.stringy.replace(/[^0-9.-]+/g, ""));
+		return isNaN(n) ? null: n;
+  }
+
 	var ALT159 = function(obj) {
 		if (typeof obj === "string") {
 			return new stringy(obj);
