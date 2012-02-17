@@ -1,0 +1,9 @@
+*.swp
+*.gem
+.bundle
+.rbenv-version
+Gemfile.lock
+pkg/*
+
+vendor
+bin
