@@ -28,14 +28,13 @@ describe("Stringy", function() {
   });
 
 
-
   describe("format", function() {
 
     it("past nothing should do nothing", function() {
       subject = ALT159("i am a string").format()
       expect(subject).toEqual("i am a string");
     });
-    
+
     it("should replase {0} with first arg" , function() {
       subject = ALT159("i am a {0}").format("string")
       expect(subject).toEqual("i am a string");
@@ -44,6 +43,34 @@ describe("Stringy", function() {
     it("should replase {0} and {1} with args" , function() {
       subject = ALT159("{1} am a {0}").format("string",'i')
       expect(subject).toEqual("i am a string");
+    });
+
+  });
+
+  describe('underscore', function(){
+
+    it('underscores camelcase', function() {
+      subject = ALT159("CamelCase").underscore();
+      expect(subject).toEqual('camel_case');
+    });
+
+    it('underscores sentences', function() {
+      subject = ALT159("I am a sentence").underscore();
+      expect(subject).toEqual('i_am_a_sentence');
+    });
+
+  });
+
+  describe('humanize',function(){
+
+    it('humanizes underscored', function(){
+      subject = ALT159("snake_case").humanize();
+      expect(subject).toEqual('Snake case')
+    });
+
+    it('humanizes camelcase', function(){
+      subject = ALT159("CamelCase").humanize();
+      expect(subject).toEqual('Camel Case');
     });
 
   });
