@@ -63,10 +63,19 @@ ALT159 = \u0192 = f = (function(obj) {
     }
 
   , humanize: function () {
-    var arr = this.stringy.split('_');
-    arr[0] = f(arr[0]).capitalize();
-    return arr.join(' ');
-  }
+      var humanized = [];
+      for (var ch in this.stringy.split('')){
+        if (ch != 0 && this.stringy[ch].match(/[A-Z]/)){
+          humanized.push('_');
+        }
+        if (!this.stringy[ch].match(/\-/)) {
+          humanized.push(this.stringy[ch]);
+        }
+      }
+      humanized = humanized.join('').split('_');
+      humanized[0] = f(humanized[0]).capitalize();
+      return humanized.join(' ');
+    }
 
   };
 
