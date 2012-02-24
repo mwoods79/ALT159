@@ -63,7 +63,9 @@ ALT159 = \u0192 = f = (function(obj) {
     }
 
   , humanize: function () {
-    // body...
+    var arr = this.stringy.split('_');
+    arr[0] = f(arr[0]).capitalize();
+    return arr.join(' ');
   }
 
   };
