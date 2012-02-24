@@ -75,4 +75,25 @@ describe("Stringy", function() {
 
   });
 
+  describe('pluralize',function(){
+
+    it('pluralize normal word', function(){
+      subject = ALT159("snake").pluralize();
+      expect(subject).toEqual('snakes')
+    });
+
+    it('pluralize work ending in s', function(){
+      subject = ALT159("class").pluralize();
+      expect(subject).toEqual('classes');
+    });
+
+    it('pluralize special words', function(){
+      subject = ALT159("cow").pluralize();
+      expect(subject).toEqual('kine');
+    });
+
+  });
+
+
+
 });
