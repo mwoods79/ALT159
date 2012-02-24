@@ -52,10 +52,12 @@ ALT159 = \u0192 = f = (function(obj) {
   , underscore: function () {
      var underscored = [];
      for (var ch in this.stringy.split('')){
-       if (ch != 0 && this.stringy[ch].match(/[A-Z]/)){
+       if (ch != 0 && this.stringy[ch].match(/[A-Z|\s]/)){
          underscored.push('_');
        }
-       underscored.push(this.stringy[ch].toLowerCase());
+       if(!this.stringy[ch].match(/\s/)){
+         underscored.push(this.stringy[ch].toLowerCase());
+       }
      }
      return underscored.join('');
     }
