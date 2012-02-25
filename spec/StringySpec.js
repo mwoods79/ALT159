@@ -87,9 +87,14 @@ describe("Stringy", function() {
       expect(subject).toEqual('classes');
     });
 
-    it('pluralize special words', function(){
+    it('pluralize irregular words', function(){
       subject = ALT159("cow").pluralize();
       expect(subject).toEqual('kine');
+    });
+
+    it('pluralize uncountable words', function(){
+      subject = ALT159("rice").pluralize();
+      expect(subject).toEqual('rice');
     });
 
   });
