@@ -75,4 +75,58 @@ describe("Stringy", function() {
 
   });
 
+  describe('pluralize',function(){
+
+    it('pluralize normal word', function(){
+      subject = ALT159("snake").pluralize();
+      expect(subject).toEqual('snakes')
+    });
+
+    it('pluralize work ending in s', function(){
+      subject = ALT159("class").pluralize();
+      expect(subject).toEqual('classes');
+    });
+
+    it('pluralize irregular words', function(){
+      subject = ALT159("cow").pluralize();
+      expect(subject).toEqual('kine');
+    });
+
+    it('pluralize uncountable words', function(){
+      subject = ALT159("rice").pluralize();
+      expect(subject).toEqual('rice');
+    });
+
+  });
+
+
+
+  describe('singularize',function(){
+
+    it('singularize normal word', function(){
+      subject = ALT159("snakes").singularize();
+      expect(subject).toEqual('snake')
+    });
+
+    it('singularize work ending in s', function(){
+      subject = ALT159("classes").singularize();
+      expect(subject).toEqual('class');
+    });
+
+    it('singularize irregular words', function(){
+      subject = ALT159("kine").singularize();
+      expect(subject).toEqual('cow');
+    });
+
+    it('singularize uncountable words', function(){
+      subject = ALT159("rice").singularize();
+      expect(subject).toEqual('rice');
+    });
+
+  });
+
+
+
+
+
 });
