@@ -87,12 +87,13 @@ ALT159 = \u0192 = f = (function(obj) {
     inflect.singular(/(database)s$/i, '$1');
     inflect.irregular('person', 'people');
     inflect.irregular('man', 'men');
+    inflect.irregular('woman', 'women');
     inflect.irregular('child', 'children');
     inflect.irregular('sex', 'sexes');
     inflect.irregular('move', 'moves');
     inflect.irregular('cow', 'kine');
     inflect.irregular('zombie', 'zombies');
-    inflect.uncountable(['equipment','information','rice','money','species','series','fish','sheep','jeans']);
+    inflect.uncountable(['equipment','information','rice','money','species','series','fish','sheep','jeans','bacon']);
   
   
   
