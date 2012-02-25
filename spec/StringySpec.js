@@ -101,4 +101,32 @@ describe("Stringy", function() {
 
 
 
+  describe('singularize',function(){
+
+    it('singularize normal word', function(){
+      subject = ALT159("snakes").singularize();
+      expect(subject).toEqual('snake')
+    });
+
+    it('singularize work ending in s', function(){
+      subject = ALT159("classes").singularize();
+      expect(subject).toEqual('class');
+    });
+
+    it('singularize irregular words', function(){
+      subject = ALT159("kine").singularize();
+      expect(subject).toEqual('cow');
+    });
+
+    it('singularize uncountable words', function(){
+      subject = ALT159("rice").singularize();
+      expect(subject).toEqual('rice');
+    });
+
+  });
+
+
+
+
+
 });

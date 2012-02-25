@@ -36,7 +36,7 @@ ALT159 = \u0192 = f = (function(obj) {
       uncountable : function(words){ rules.uncountable = words }
     };
 
-    //stollen shamelessly from rails soure
+    //stollen shamelessly from rails source
     inflect.plural(/$/, 's');
     inflect.plural(/s$/i, 's');
     inflect.plural(/^(ax|test)is$/i, '$1es');
@@ -155,23 +155,36 @@ ALT159 = \u0192 = f = (function(obj) {
     }
 
   , pluralize: function() {
-
       //irregular Words
       if( rules.uncountable.indexOf(this.stringy) > 0) return this.stringy;
-
       //irregular Words
       for (var i = rules.irregular.length; i > 0; i--) {
         var r = rules.irregular[i - 1];
         if(this.stringy == r[0] ) return r[1];
       }
-
       //Normal Words
       for (var i = rules.plural.length; i > 0; i--) {
         var r = rules.plural[i - 1];
         if(this.stringy.match(r[0]) ) return this.stringy.replace(r[0],r[1]);
       }
-
     }
+
+
+  , singularize: function() {
+      //irregular Words
+      if( rules.uncountable.indexOf(this.stringy) > 0) return this.stringy;
+      //irregular Words
+      for (var i = rules.irregular.length; i > 0; i--) {
+        var r = rules.irregular[i - 1];
+        if(this.stringy == r[1] ) return r[0];
+      }
+      //Normal Words
+      for (var i = rules.singular.length; i > 0; i--) {
+        var r = rules.singular[i - 1];
+        if(this.stringy.match(r[0]) ) return this.stringy.replace(r[0],r[1]);
+      }
+    }
+
 
   };
 
