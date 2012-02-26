@@ -189,11 +189,37 @@ ALT159 = \u0192 = f = (function(obj) {
 
   };
 
+  var Lagniappe = function(obj) {
+  };
+
+  Lagniappe.prototype = {
+    reloadStylesheets: function() {
+      var queryString = '?reload=' + new Date().getTime();
+      var links = document.getElementsByTagName("link");
+      for (var i = links.length; i > 0; i--) 
+        if(links[i] && links[i].ref === "stylesheet")
+          links[i].href = links[i].href.replace(/\?.*|$/, queryString);
+    },
+
+    extendPrototypes: function() {
+      var addFunction = function(obj, func, key){
+        obj.prototype[key] = function(){
+          return func.apply( {stringy: this }, arguments );  
+        };
+      }
+      var unnicer  = function(obj, to_add){
+        for( var key in to_add.prototype)
+          if( !obj.prototype[key] )
+            addFunction(obj, to_add.prototype[key], key );
+      };
+      unnicer(String, Stringy);
+    },
+  };
 
   var ALT159 = function(obj) {
-    if (typeof obj === "string") {
-      return new Stringy(obj);
-    }
+    if(typeof obj === "string") return new Stringy(obj);
+    if(obj === void 0) return new Lagniappe();
+    return null;
   }
 
   return ALT159;
