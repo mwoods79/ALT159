@@ -13,7 +13,7 @@
       .functions > div    { background-color:#7D2A35}
       .example            { background-color:#B4BA6C}
       h1                  { 
-                            background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2E1Mzg0NSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM3ZDJhMzUiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+                            background-color:#7D2A35;
                             background: -moz-linear-gradient(top, #a53845 0%, #7d2a35 100%);
                             background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a53845), color-stop(100%,#7d2a35));
                             background: -webkit-linear-gradient(top, #a53845 0%,#7d2a35 100%);
@@ -29,6 +29,7 @@
       a, a:visited        { color:#FEFFC2}
       a:hover             { color:#7D2A35}
       a                   { text-decoration:none}
+      .nav a              { display:inline-block}
       h1                  { text-shadow:5px 5px 2px #333}
       h2                  { text-shadow:3px 3px 2px #333}
       .nav a              { line-height:1.5em }
@@ -59,10 +60,11 @@
       h2                  { top:8em}
       h2                  { left:18em}
       .nav                { float:left}
-      .nav                { height:100%}
+      .nav                { height:30em}
       .nav.fixed          { height:auto}
       .nav                { width:7em}
       .nav                { overflow-y:scroll}
+      .nav                { overflow-x:hidden}
       h1                  { box-shadow:3px 3px 3px #333}
       .functions > div    { box-shadow:3px 3px 3px #333}
       .functions > div,
@@ -73,9 +75,9 @@
     </style>
   </head>
   <body>
-    <h1>&#x0192( )</h1>
+    <h1>ƒ( )</h1>
     <h2>ALT159.js - A Javascript library for basic types</h2>
-    <div class='nav'>
+    <div class='nav' id='nav'>
 
       <a class='group' href='#string' >String</a>
       <a href='#capitalize'           >.capitalize()</a>
@@ -92,7 +94,7 @@
       <div class='about'>
         <p>If you have ever worked with javascript, you probable found the methods on basic type lacking. ALT159 aims to fix this providing a simple to use collection of functions for your basic type.</p>
         <p>ALT159 can be accessed by using the Javascrpit Function ALT159() or one of its two shortcuts f() or the windows key combination ALT+159 
-          to get =&gt; &#x0192</p>
+          to get =&gt; ƒ</p>
         <p>All source code for ALT159 can be found on <a href='https://github.com/mwoods79/ALT159'>Github</a> </p>
       </div>
 
@@ -103,34 +105,34 @@
         <div id="capitalize">
           <h4>capitalize</h4>
           <div>capitalize the words in a string</div>
-          <div class='example'>&#x0192('bacon').capitalize() =&gt; 'Bacon'</div>
+          <div class='example'>ƒ('bacon').capitalize() =&gt; 'Bacon'</div>
         </div>
 
         <div id="numbers">
           <h4>numbers</h4>
           <div>returns only the number in a string</div>
-          <div class='example'>&#x0192('the meening of life: 42').numbers() =&gt; 42</div>
+          <div class='example'>ƒ('the meening of life: 42').numbers() =&gt; 42</div>
         </div>
 
         <div id="format">
           <h4>format</h4>
           <div>a C style format method</div>
-          <div class='example'>&#x0192('my name is {0}').format('Blarg') =&gt; 'my name is Blarg'</div>
+          <div class='example'>ƒ('my name is {0}').format('Blarg') =&gt; 'my name is Blarg'</div>
         </div>
 
         <div id="underscore">
           <h4>underscore</h4>
           <div>formats a string with underscores</div>
-          <div class='example'>&#x0192('HoneyBadger dont care').underscore() =&gt; 'honey_badger_dont_care'</div>
+          <div class='example'>ƒ('HoneyBadger dont care').underscore() =&gt; 'honey_badger_dont_care'</div>
         </div>
 
         <div id="humanize">
           <h4>humanize</h4>
           <div>converts a string to be read by a human</div>
           <div class='example'>
-            &#x0192('FluxCapacitor').humanize() =&gt; 'Flux Capacitor'
+            ƒ('FluxCapacitor').humanize() =&gt; 'Flux Capacitor'
             <br>
-            &#x0192('1.21_giga_watts').humanize() =&gt; '1.21 giga watts'
+            ƒ('1.21_giga_watts').humanize() =&gt; '1.21 giga watts'
           </div>
         </div>
 
@@ -138,13 +140,13 @@
           <h4>pluralize</h4>
           <div>takes a word and pluralizes it</div>
           <div class='example'>
-            &#x0192('person').pluralize() =&gt; 'people'
+            ƒ('person').pluralize() =&gt; 'people'
             <br>
-            &#x0192('Jelly Bean').pluralize() =&gt; 'Jelly Beans'
+            ƒ('Jelly Bean').pluralize() =&gt; 'Jelly Beans'
             <br>
-            &#x0192('mouse').pluralize() =&gt; 'mice'
+            ƒ('mouse').pluralize() =&gt; 'mice'
             <br>
-            &#x0192('rice').pluralize() =&gt; 'rice'
+            ƒ('rice').pluralize() =&gt; 'rice'
           </div>
         </div>
 
@@ -152,13 +154,13 @@
           <h4>singularize</h4>
           <div>takes a word and singularizes it</div>
           <div class='example'>
-            &#x0192('kine').singularize() =&gt; 'cow'
+            ƒ('kine').singularize() =&gt; 'cow'
             <br>
-            &#x0192('women').singularize() =&gt; 'woman'
+            ƒ('women').singularize() =&gt; 'woman'
             <br>
-            &#x0192('matches').singularize() =&gt; 'match'
+            ƒ('matches').singularize() =&gt; 'match'
             <br>
-            &#x0192('goats').singularize() =&gt; 'goat'
+            ƒ('goats').singularize() =&gt; 'goat'
           </div>
         </div>
 
@@ -170,15 +172,21 @@
 
   <script type='text/javascript'>
     (function(){
-     var nav = document.getElementsByClassName('nav')[0];
+     var nav = document.getElementById('nav');
+     var html = document.getElementsByTagName('html')[0];
      var body = document.getElementsByTagName('body')[0];
      var onScroll = function(e){
-       if(body.scrollTop >= 308)
-         nav.classList.add("fixed");
+       if(html.scrollTop >= 308 || body.scrollTop >= 308)
+         nav.className = "nav fixed";
        else
-         nav.classList.remove("fixed");
+         nav.className = "nav";
      };
-     document.addEventListener("scroll", onScroll, true);
+     if( document.addEventListener != void 0)
+       document.addEventListener("scroll", onScroll, true);
+     else
+       window.onscroll = onScroll;
+       //#document.attachEvent("onscroll", onScroll);
+
      })();
   </script>
 
