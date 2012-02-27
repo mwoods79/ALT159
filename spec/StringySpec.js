@@ -162,13 +162,9 @@ describe("Stringy", function() {
       subject = ALT159("  ").isBlank();
       expect(subject).toEqual(true);
     });
-    it('should return true if empty array string', function(){
-      subject = ALT159("[]").isBlank();
-      expect(subject).toEqual(true);
-    });
     it('should return false if contains something', function(){
       subject = ALT159(":P").isBlank();
-      expect(subject).toEqual(true);
+      expect(subject).toEqual(false);
     });
   });
 
