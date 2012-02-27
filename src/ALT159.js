@@ -106,6 +106,7 @@ ALT159 = \u0192 = f = (function(obj) {
   Stringy.prototype = {
 
     capitalize: function () {
+      if(this.stringy === '')return this.stringy;
       var lowerCased = this.stringy.toLowerCase();
       var word = lowerCased[0].toUpperCase() + lowerCased.substring(1);
       return word;

@@ -1,10 +1,17 @@
 describe("Stringy", function() {
 
   describe("capitalize", function() {
+
     it("should capitalize the stirng", function() {
       subject = ALT159("i am a stringy").capitalize();
       expect(subject).toEqual("I am a stringy");
     });
+
+    it("should capitalize an empty stirng", function() {
+      subject = ALT159("").capitalize();
+      expect(subject).toEqual("");
+    });
+
   });
 
 
@@ -127,6 +134,42 @@ describe("Stringy", function() {
 
 
 
+  describe('titleize',function(){
+    it('should capitalize all the words', function(){
+      subject = ALT159("all the words").titleize();
+      expect(subject).toEqual('All The Words')
+    });
+  });
 
+  describe('truncate',function(){
+    it('should chop of extra bits', function(){
+      subject = ALT159("a long long string").truncate(7);
+      expect(subject).toEqual('a long ...')
+    });
+    it('should allow for different (extras)', function(){
+      subject = ALT159("a long long string").truncate(7, "");
+      expect(subject).toEqual('a long ')
+    });
+  });
+
+
+  describe('isBlank',function(){
+    it('should return true if empty', function(){
+      subject = ALT159("").isBlank();
+      expect(subject).toEqual(true)
+    });
+    it('should return true if spaces', function(){
+      subject = ALT159("  ").isBlank();
+      expect(subject).toEqual(true);
+    });
+    it('should return true if empty array string', function(){
+      subject = ALT159("[]").isBlank();
+      expect(subject).toEqual(true);
+    });
+    it('should return false if contains something', function(){
+      subject = ALT159(":P").isBlank();
+      expect(subject).toEqual(true);
+    });
+  });
 
 });

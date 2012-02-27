@@ -18,6 +18,4 @@ describe("Lagniappe", function() {
 
   });
 
-
-
 });
