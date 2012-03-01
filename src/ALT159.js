@@ -192,14 +192,17 @@ ALT159 = \u0192 = f = (function(obj) {
         precision:  2,
         symbol:     '$',
         dot:        '.',
-        seperator:  ','
+        seperator:  ',',
+        default:    '-'
       }
       
       // Assigning defaults
       for( var prop in defaults ){
         (options[prop] !== void 0) || (options[prop] = defaults[prop]); 
       }
-
+      if( !this.stringy ) {
+        return options.default;
+      } else {
       var val    = parseFloat(this.stringy),
           sign   = val < 0 ? "-" : "",
           i      = parseInt(val = Math.abs(+val || 0).toFixed(options.precision)) + "",
@@ -209,6 +212,7 @@ ALT159 = \u0192 = f = (function(obj) {
           last   = (options.precision ? options.dot + Math.abs(val - i).toFixed(options.precision).slice(2) : "");
           
        return  first + middle + last;
+      }
     }
 
   , number: function(opts){
