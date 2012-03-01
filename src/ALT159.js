@@ -186,8 +186,36 @@ ALT159 = \u0192 = f = (function(obj) {
         if(this.stringy.match(r[0]) ) return this.stringy.replace(r[0],r[1]);
       }
     }
+  , money: function(options){
+      options || (options = {})
+      var defaults = {
+        precision:  2,
+        symbol:     '$',
+        dot:        '.',
+        seperator:  ','
+      }
+      
+      // Assigning defaults
+      for( var prop in defaults ){
+        (options[prop] !== void 0) || (options[prop] = defaults[prop]); 
+      }
 
+      var val    = parseFloat(this.stringy),
+          sign   = val < 0 ? "-" : "",
+          i      = parseInt(val = Math.abs(+val || 0).toFixed(options.precision)) + "",
+          j      = (j = i.length) > 3 ? j % 3 : 0,
+          first  = (sign + options.symbol +  (j ? i.substr(0, j) + options.seperator : "")),
+          middle = i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + options.seperator),
+          last   = (options.precision ? options.dot + Math.abs(val - i).toFixed(options.precision).slice(2) : "");
+          
+       return  first + middle + last;
+    }
 
+  , number: function(opts){
+      var opts = opts || {};
+      opts.symbol = '';
+      return f(this.stringy).money(opts);
+    }
   };
 
   var Lagniappe = function(obj) {
