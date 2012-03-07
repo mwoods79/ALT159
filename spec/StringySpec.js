@@ -35,24 +35,6 @@ describe("Stringy", function() {
   });
 
 
-  describe("format", function() {
-
-    it("past nothing should do nothing", function() {
-      subject = ALT159("i am a string").format()
-      expect(subject).toEqual("i am a string");
-    });
-
-    it("should replase {0} with first arg" , function() {
-      subject = ALT159("i am a {0}").format("string")
-      expect(subject).toEqual("i am a string");
-    });
-
-    it("should replase {0} and {1} with args" , function() {
-      subject = ALT159("{1} am a {0}").format("string",'i')
-      expect(subject).toEqual("i am a string");
-    });
-
-  });
 
   describe('underscore', function(){
 
