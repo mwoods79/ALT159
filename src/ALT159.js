@@ -164,6 +164,7 @@
       underscored = underscored.join("");
       return underscored.replace(/^_?/, "");
     },
+    camel: function() {},
     humanize: function() {
       var ch, humanized;
       humanized = [];
@@ -207,7 +208,57 @@
         i--;
       }
     },
-    titleize: function() {}
+    money: function(options) {
+      var defaults, first, i, j, last, middle, prop, sign, val;
+      options || (options = {});
+      defaults = {
+        precision: 2,
+        symbol: "$",
+        dot: ".",
+        seperator: ",",
+        "default": "-"
+      };
+      for (prop in defaults) {
+        (options[prop] !== void 0) || (options[prop] = defaults[prop]);
+      }
+      if (!this.stringy) {
+        return options.defaults;
+      } else {
+        val = parseFloat(this.stringy);
+        sign = (val < 0 ? "-" : "");
+        i = parseInt(val = Math.abs(+val || 0).toFixed(options.precision)) + "";
+        j = ((j = i.length) > 3 ? j % 3 : 0);
+        first = sign + options.symbol + (j ? i.substr(0, j) + options.seperator : "");
+        middle = i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + options.seperator);
+        last = (options.precision ? options.dot + Math.abs(val - i).toFixed(options.precision).slice(2) : "");
+        return first + middle + last;
+      }
+    },
+    number: function(opts) {
+      opts = opts || {};
+      opts.symbol = "";
+      return f(this.stringy).money(opts);
+    },
+    titleize: function() {
+      var parts, word;
+      parts = this.stringy.split(RegExp(' '));
+      parts = (function() {
+        var _i, _len, _results;
+        _results = [];
+        for (_i = 0, _len = parts.length; _i < _len; _i++) {
+          word = parts[_i];
+          _results.push(f(word).capitalize());
+        }
+        return _results;
+      })();
+      return parts.join(" ");
+    },
+    isBlank: function() {
+      var clean;
+      clean = this.stringy || "";
+      clean = clean.replace(RegExp(' ', 'g'), "");
+      return clean === "";
+    }
   };
 
   window.ALT159 = window.f = (function(obj) {

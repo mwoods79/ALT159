@@ -97,6 +97,9 @@ Stringy:: =
     underscored = underscored.join ""
     underscored.replace(/^_?/,"")
 
+  camel: ->
+
+
   humanize: ->
     humanized = []
     for ch of @stringy.split("")
@@ -132,8 +135,40 @@ Stringy:: =
       return @stringy.replace(r[0], r[1])  if @stringy.match(r[0])
       i--
 
+  money: (options) ->
+    options or (options = {})
+    defaults =
+      precision: 2
+      symbol: "$"
+      dot: "."
+      seperator: ","
+      default: "-"
+    for prop of defaults
+      (options[prop] isnt undefined) or (options[prop] = defaults[prop])
+    unless @stringy
+      options.defaults 
+    else
+      val = parseFloat(@stringy)
+      sign = (if val < 0 then "-" else "")
+      i = parseInt(val = Math.abs(+val or 0).toFixed(options.precision)) + ""
+      j = (if (j = i.length) > 3 then j % 3 else 0)
+      first = (sign + options.symbol + (if j then i.substr(0, j) + options.seperator else ""))
+      middle = i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + options.seperator)
+      last = (if options.precision then options.dot + Math.abs(val - i).toFixed(options.precision).slice(2) else "")
+      first + middle + last
+
+  number: (opts) ->
+    opts = opts or {}
+    opts.symbol = ""
+    f(@stringy).money opts
+
   titleize: ->
-    #cap = (x) -> 
-    #  f(x).capitalize
-    #cap x for x in (@stringy.split(/ /))
-    #@stringy.split(/ /).each( (x)-> f(x)  ).join(" ")
+    parts = @stringy.split RegExp(' ')
+    parts = (f(word).capitalize() for word in parts)
+    parts.join " "
+
+  isBlank: ->
+    clean = @stringy || ""
+    clean = clean.replace RegExp(' ','g'), ""
+    clean is ""
+

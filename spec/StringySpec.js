@@ -50,6 +50,22 @@ describe("Stringy", function() {
 
   });
 
+
+  describe('camel', function(){
+
+    it('CamelCase underscore', function() {
+      subject = ALT159("CamelCase").camel();
+      expect(subject).toEqual('CamelCase');
+    });
+
+    it('underscores sentences', function() {
+      subject = ALT159("I am a sentence").camel();
+      expect(subject).toEqual('IAmASentence');
+    });
+
+  });
+
+
   describe('humanize',function(){
 
     it('humanizes underscored', function(){
