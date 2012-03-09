@@ -164,7 +164,9 @@
       underscored = underscored.join("");
       return underscored.replace(/^_?/, "");
     },
-    camel: function() {},
+    camel: function() {
+      return f(f(this.stringy).underscore()).titleize().replace(RegExp(" ", "g"), "");
+    },
     humanize: function() {
       var ch, humanized;
       humanized = [];
@@ -241,7 +243,7 @@
     },
     titleize: function() {
       var parts, word;
-      parts = this.stringy.split(RegExp(' '));
+      parts = this.stringy.split(RegExp('[ _]'));
       parts = (function() {
         var _i, _len, _results;
         _results = [];
@@ -258,6 +260,22 @@
       clean = this.stringy || "";
       clean = clean.replace(RegExp(' ', 'g'), "");
       return clean === "";
+    },
+    truncate: function(amount, tail) {
+      var parts, str;
+      if (tail == null) tail = "...";
+      parts = [];
+      parts = (function() {
+        var _i, _len, _ref, _results;
+        _ref = this.stringy;
+        _results = [];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          str = _ref[_i];
+          if (_i < amount) _results.push(str);
+        }
+        return _results;
+      }).call(this);
+      return parts.join("") + tail;
     }
   };
 

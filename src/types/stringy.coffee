@@ -98,7 +98,7 @@ Stringy:: =
     underscored.replace(/^_?/,"")
 
   camel: ->
-
+    f(f(@stringy).underscore()).titleize().replace(RegExp(" ","g"), "")
 
   humanize: ->
     humanized = []
@@ -163,7 +163,7 @@ Stringy:: =
     f(@stringy).money opts
 
   titleize: ->
-    parts = @stringy.split RegExp(' ')
+    parts = @stringy.split RegExp('[ _]')
     parts = (f(word).capitalize() for word in parts)
     parts.join " "
 
@@ -171,4 +171,11 @@ Stringy:: =
     clean = @stringy || ""
     clean = clean.replace RegExp(' ','g'), ""
     clean is ""
+
+  truncate: (amount, tail="...")->
+    parts = []
+    parts = (str for str in @stringy when _i < amount)
+    parts.join("") + tail
+
+
 

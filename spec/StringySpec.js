@@ -53,8 +53,13 @@ describe("Stringy", function() {
 
   describe('camel', function(){
 
-    it('CamelCase underscore', function() {
+    it('CamelCase CamelCase', function() {
       subject = ALT159("CamelCase").camel();
+      expect(subject).toEqual('CamelCase');
+    });
+
+    it('CamelCase underscore', function() {
+      subject = ALT159("camel_case").camel();
       expect(subject).toEqual('CamelCase');
     });
 
@@ -133,10 +138,17 @@ describe("Stringy", function() {
 
 
   describe('titleize',function(){
+
+    it('should capitalize all the words', function(){
+      subject = ALT159("all_the_words").titleize();
+      expect(subject).toEqual('All The Words')
+    });
+
     it('should capitalize all the words', function(){
       subject = ALT159("all the words").titleize();
       expect(subject).toEqual('All The Words')
     });
+
   });
 
   describe('truncate',function(){
