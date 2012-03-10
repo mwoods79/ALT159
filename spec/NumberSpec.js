@@ -2,16 +2,16 @@ describe("Number", function() {
 
   describe("odd even", function() {
     it("should not be odd ", function() {
-      ALT159(2).isOdd().toEqual(false);
+      expect(ALT159(2).isOdd()).toBeFalsy()
     });
     it("should be odd ", function() {
-      ALT159(3).isOdd().toEqual(true);
+      expect(ALT159(3).isOdd()).toBeTruthy()
     });
     it("should be even ", function() {
-      ALT159(2).isEven().toEqual(true);
+      expect(ALT159(2).isEven()).toBeTruthy()
     });
     it("should not be even ", function() {
-      ALT159(3).isEven().toEqual(false);
+      expect(ALT159(3).isEven()).toBeFalsy()
     });
   });
 

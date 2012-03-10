@@ -25,8 +25,10 @@ window.ALT159 = window.f = ((obj) ->
   #include 'stringy.coffee'
 
   ALT159 = (obj) ->
-    return new Stringy(obj)  if typeof obj is "string"
-    #return new Lagniappe()  if obj is undefined
+    return new Stringy(obj) if typeof obj is "string"
+    return new Numbery(obj) if toString.call(obj) is "[object Number]"
+    return new Datey(obj)   if toString.call(obj) is "[object Date]"
+    return new Lagniappe()  if obj is undefined
     null
 
   ALT159

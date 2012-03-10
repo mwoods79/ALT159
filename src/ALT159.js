@@ -1,5 +1,61 @@
 (function() {
-  var Stringy, inflect, rules;
+  var Datey, Lagniappe, Numbery, Stringy, inflect, rules;
+
+  Lagniappe = function() {};
+
+  Lagniappe.prototype = {
+    extendPrototypes: function() {
+      var addFunction, unnicer;
+      addFunction = function(obj, func, key) {
+        return obj.prototype[key] = function() {
+          return func.apply({
+            stringy: this
+          }, arguments);
+        };
+      };
+      unnicer = function(obj, to_add) {
+        var key, _results;
+        _results = [];
+        for (key in to_add.prototype) {
+          if (!obj.prototype[key]) {
+            _results.push(addFunction(obj, to_add.prototype[key], key));
+          } else {
+            _results.push(void 0);
+          }
+        }
+        return _results;
+      };
+      return unnicer(String, Stringy);
+    },
+    reloadStylesheets: function() {
+      var i, links, queryString;
+      queryString = "?reload=" + new Date().getTime();
+      links = document.getElementsByTagName("link");
+      i = 0;
+      while (i < links.length) {
+        if (links[i] && links[i].ref === "stylesheet") {
+          links[i].href = links[i].href.replace(/\?.*|$/, queryString);
+        }
+        i++;
+      }
+      return true;
+    }
+  };
+
+  Numbery = function(val) {
+    return this.value = val;
+  };
+
+  Numbery.prototype = {
+    isEven: function() {
+      return this.value % 2 === 0;
+    },
+    isOdd: function() {
+      return this.value % 2 === 1;
+    }
+  };
+
+  Datey = function() {};
 
   rules = {
     plural: [],
@@ -283,6 +339,9 @@
     var ALT159;
     ALT159 = function(obj) {
       if (typeof obj === "string") return new Stringy(obj);
+      if (toString.call(obj) === "[object Number]") return new Numbery(obj);
+      if (toString.call(obj) === "[object Date]") return new Datey(obj);
+      if (obj === void 0) return new Lagniappe();
       return null;
     };
     return ALT159;
