@@ -5,5 +5,5 @@
 Gemfile.lock
 pkg/*
 
-vendor
+lib/*.js
 bin
