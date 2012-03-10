@@ -9,7 +9,7 @@
       addFunction = function(obj, func, key) {
         return obj.prototype[key] = function() {
           return func.apply({
-            stringy: this
+            value: this
           }, arguments);
         };
       };
@@ -25,7 +25,12 @@
         }
         return _results;
       };
-      return unnicer(String, Stringy);
+      unnicer(String, Stringy);
+      return unnicer(Number, Numbery);
+    },
+    chain: function(value, type) {
+      f().extendPrototypes();
+      return value;
     },
     reloadStylesheets: function() {
       var i, links, queryString;
@@ -194,41 +199,41 @@
   inflect.uncountable(['equipment', 'information', 'rice', 'money', 'species', 'series', 'fish', 'sheep', 'jeans', 'bacon']);
 
   Stringy = function(obj) {
-    return this.stringy = obj;
+    return this.value = obj;
   };
 
   Stringy.prototype = {
     capitalize: function() {
       var lowerCased, word;
-      if (this.stringy === '') return this.stringy;
-      lowerCased = this.stringy.toLowerCase();
+      if (this.value === '') return this.value;
+      lowerCased = this.value.toLowerCase();
       word = lowerCased[0].toUpperCase() + lowerCased.substring(1);
       return word;
     },
     numbers: function() {
-      return parseFloat(this.stringy.replace(/[^0-9.-]+/g, ""));
+      return parseFloat(this.value.replace(/[^0-9.-]+/g, ""));
     },
     underscore: function() {
       var ch, underscored;
       underscored = [];
-      for (ch in this.stringy.split("")) {
-        if (ch !== 0 && this.stringy[ch].match(/[A-Z|\s]/)) underscored.push("_");
-        if (!this.stringy[ch].match(/\s/)) {
-          underscored.push(this.stringy[ch].toLowerCase());
+      for (ch in this.value.split("")) {
+        if (ch !== 0 && this.value[ch].match(/[A-Z|\s]/)) underscored.push("_");
+        if (!this.value[ch].match(/\s/)) {
+          underscored.push(this.value[ch].toLowerCase());
         }
       }
       underscored = underscored.join("");
       return underscored.replace(/^_?/, "");
     },
     camel: function() {
-      return f(f(this.stringy).underscore()).titleize().replace(RegExp(" ", "g"), "");
+      return f(f(this.value).underscore()).titleize().replace(RegExp(" ", "g"), "");
     },
     humanize: function() {
       var ch, humanized;
       humanized = [];
-      for (ch in this.stringy.split("")) {
-        if (ch !== 0 && this.stringy[ch].match(/[A-Z]/)) humanized.push("_");
-        if (!this.stringy[ch].match(/\-/)) humanized.push(this.stringy[ch]);
+      for (ch in this.value.split("")) {
+        if (ch !== 0 && this.value[ch].match(/[A-Z]/)) humanized.push("_");
+        if (!this.value[ch].match(/\-/)) humanized.push(this.value[ch]);
       }
       humanized = humanized.join("").split("_");
       humanized[0] = f(humanized[0]).capitalize();
@@ -236,33 +241,33 @@
     },
     pluralize: function() {
       var i, r;
-      if (rules.uncountable.indexOf(this.stringy) > 0) return this.stringy;
+      if (rules.uncountable.indexOf(this.value) > 0) return this.value;
       i = rules.irregular.length;
       while (i > 0) {
         r = rules.irregular[i - 1];
-        if (this.stringy === r[0]) return r[1];
+        if (this.value === r[0]) return r[1];
         i--;
       }
       i = rules.plural.length;
       while (i > 0) {
         r = rules.plural[i - 1];
-        if (this.stringy.match(r[0])) return this.stringy.replace(r[0], r[1]);
+        if (this.value.match(r[0])) return this.value.replace(r[0], r[1]);
         i--;
       }
     },
     singularize: function() {
       var i, r;
-      if (rules.uncountable.indexOf(this.stringy) > 0) return this.stringy;
+      if (rules.uncountable.indexOf(this.value) > 0) return this.value;
       i = rules.irregular.length;
       while (i > 0) {
         r = rules.irregular[i - 1];
-        if (this.stringy === r[1]) return r[0];
+        if (this.value === r[1]) return r[0];
         i--;
       }
       i = rules.singular.length;
       while (i > 0) {
         r = rules.singular[i - 1];
-        if (this.stringy.match(r[0])) return this.stringy.replace(r[0], r[1]);
+        if (this.value.match(r[0])) return this.value.replace(r[0], r[1]);
         i--;
       }
     },
@@ -279,10 +284,10 @@
       for (prop in defaults) {
         (options[prop] !== void 0) || (options[prop] = defaults[prop]);
       }
-      if (!this.stringy) {
+      if (!this.value) {
         return options.defaults;
       } else {
-        val = parseFloat(this.stringy);
+        val = parseFloat(this.value);
         sign = (val < 0 ? "-" : "");
         i = parseInt(val = Math.abs(+val || 0).toFixed(options.precision)) + "";
         j = ((j = i.length) > 3 ? j % 3 : 0);
@@ -295,11 +300,11 @@
     number: function(opts) {
       opts = opts || {};
       opts.symbol = "";
-      return f(this.stringy).money(opts);
+      return f(this.value).money(opts);
     },
     titleize: function() {
       var parts, word;
-      parts = this.stringy.split(RegExp('[ _]'));
+      parts = this.value.split(RegExp('[ _]'));
       parts = (function() {
         var _i, _len, _results;
         _results = [];
@@ -313,7 +318,7 @@
     },
     isBlank: function() {
       var clean;
-      clean = this.stringy || "";
+      clean = this.value || "";
       clean = clean.replace(RegExp(' ', 'g'), "");
       return clean === "";
     },
@@ -323,7 +328,7 @@
       parts = [];
       parts = (function() {
         var _i, _len, _ref, _results;
-        _ref = this.stringy;
+        _ref = this.value;
         _results = [];
         for (_i = 0, _len = _ref.length; _i < _len; _i++) {
           str = _ref[_i];
@@ -343,6 +348,11 @@
       if (toString.call(obj) === "[object Date]") return new Datey(obj);
       if (obj === void 0) return new Lagniappe();
       return null;
+    };
+    ALT159.types = {
+      Stringy: Stringy,
+      Numbery: Numbery,
+      Datey: Datey
     };
     return ALT159;
   })();

@@ -75,64 +75,64 @@ inflect.uncountable(['equipment','information','rice','money','species','series'
 
 
 Stringy = (obj) ->
-  @stringy = obj
+  @value = obj
 
 Stringy:: = 
   capitalize: -> 
-    return @stringy if(@stringy is '')
-    lowerCased = @stringy.toLowerCase()
+    return @value if(@value is '')
+    lowerCased = @value.toLowerCase()
     word = lowerCased[0].toUpperCase() + lowerCased.substring(1)
     return word
 
   # Returns only the numbers out of a string
   numbers: ->
-    parseFloat(@stringy.replace(/[^0-9.-]+/g, ""))
+    parseFloat(@value.replace(/[^0-9.-]+/g, ""))
     #return isNaN(n) ? null : n
 
   underscore: ->
     underscored = []
-    for ch of @stringy.split("")
-      underscored.push "_"  if ch isnt 0 and @stringy[ch].match(/[A-Z|\s]/)
-      underscored.push @stringy[ch].toLowerCase()  unless @stringy[ch].match(/\s/)
+    for ch of @value.split("")
+      underscored.push "_"  if ch isnt 0 and @value[ch].match(/[A-Z|\s]/)
+      underscored.push @value[ch].toLowerCase()  unless @value[ch].match(/\s/)
     underscored = underscored.join ""
     underscored.replace(/^_?/,"")
 
   camel: ->
-    f(f(@stringy).underscore()).titleize().replace(RegExp(" ","g"), "")
+    f(f(@value).underscore()).titleize().replace(RegExp(" ","g"), "")
 
   humanize: ->
     humanized = []
-    for ch of @stringy.split("")
-      humanized.push "_"  if ch isnt 0 and @stringy[ch].match(/[A-Z]/)
-      humanized.push @stringy[ch]  unless @stringy[ch].match(/\-/)
+    for ch of @value.split("")
+      humanized.push "_"  if ch isnt 0 and @value[ch].match(/[A-Z]/)
+      humanized.push @value[ch]  unless @value[ch].match(/\-/)
     humanized = humanized.join("").split("_")
     humanized[0] = f(humanized[0]).capitalize()
     humanized.join(" ").trim()
 
   pluralize: ->
-    return @stringy  if rules.uncountable.indexOf(@stringy) > 0
+    return @value  if rules.uncountable.indexOf(@value) > 0
     i = rules.irregular.length
     while i > 0
       r = rules.irregular[i - 1]
-      return r[1]  if @stringy is r[0]
+      return r[1]  if @value is r[0]
       i--
     i = rules.plural.length
     while i > 0
       r = rules.plural[i - 1]
-      return @stringy.replace(r[0], r[1])  if @stringy.match(r[0])
+      return @value.replace(r[0], r[1])  if @value.match(r[0])
       i--
 
   singularize: ->
-    return @stringy  if rules.uncountable.indexOf(@stringy) > 0
+    return @value  if rules.uncountable.indexOf(@value) > 0
     i = rules.irregular.length
     while i > 0
       r = rules.irregular[i - 1]
-      return r[0]  if @stringy is r[1]
+      return r[0]  if @value is r[1]
       i--
     i = rules.singular.length
     while i > 0
       r = rules.singular[i - 1]
-      return @stringy.replace(r[0], r[1])  if @stringy.match(r[0])
+      return @value.replace(r[0], r[1])  if @value.match(r[0])
       i--
 
   money: (options) ->
@@ -145,10 +145,10 @@ Stringy:: =
       default: "-"
     for prop of defaults
       (options[prop] isnt undefined) or (options[prop] = defaults[prop])
-    unless @stringy
+    unless @value
       options.defaults 
     else
-      val = parseFloat(@stringy)
+      val = parseFloat(@value)
       sign = (if val < 0 then "-" else "")
       i = parseInt(val = Math.abs(+val or 0).toFixed(options.precision)) + ""
       j = (if (j = i.length) > 3 then j % 3 else 0)
@@ -160,21 +160,21 @@ Stringy:: =
   number: (opts) ->
     opts = opts or {}
     opts.symbol = ""
-    f(@stringy).money opts
+    f(@value).money opts
 
   titleize: ->
-    parts = @stringy.split RegExp('[ _]')
+    parts = @value.split RegExp('[ _]')
     parts = (f(word).capitalize() for word in parts)
     parts.join " "
 
   isBlank: ->
-    clean = @stringy || ""
+    clean = @value || ""
     clean = clean.replace RegExp(' ','g'), ""
     clean is ""
 
   truncate: (amount, tail="...")->
     parts = []
-    parts = (str for str in @stringy when _i < amount)
+    parts = (str for str in @value when _i < amount)
     parts.join("") + tail
 
 
