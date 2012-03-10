@@ -1,5 +1,5 @@
 (function() {
-  var Datey, Lagniappe, Numbery, Stringy, inflect, rules;
+  var Datey, Lagniappe, Numbery, Stringy, chainable, inflect, rules;
 
   Lagniappe = function() {};
 
@@ -17,20 +17,12 @@
         var key, _results;
         _results = [];
         for (key in to_add.prototype) {
-          if (!obj.prototype[key]) {
-            _results.push(addFunction(obj, to_add.prototype[key], key));
-          } else {
-            _results.push(void 0);
-          }
+          _results.push(addFunction(obj, to_add.prototype[key], key));
         }
         return _results;
       };
       unnicer(String, Stringy);
       return unnicer(Number, Numbery);
-    },
-    chain: function(value, type) {
-      f().extendPrototypes();
-      return value;
     },
     reloadStylesheets: function() {
       var i, links, queryString;
@@ -198,6 +190,25 @@
 
   inflect.uncountable(['equipment', 'information', 'rice', 'money', 'species', 'series', 'fish', 'sheep', 'jeans', 'bacon']);
 
+  chainable = function(str) {
+    var addFunction, key;
+    str = new String(str);
+    addFunction = function(obj, func, key) {
+      return obj[key] = function() {
+        return func.apply({
+          value: this.toString()
+        }, arguments);
+      };
+    };
+    for (key in Stringy.prototype) {
+      addFunction(str, Stringy.prototype[key], key);
+    }
+    str.end = function() {
+      return this.toString();
+    };
+    return str;
+  };
+
   Stringy = function(obj) {
     return this.value = obj;
   };
@@ -208,7 +219,7 @@
       if (this.value === '') return this.value;
       lowerCased = this.value.toLowerCase();
       word = lowerCased[0].toUpperCase() + lowerCased.substring(1);
-      return word;
+      return chainable(word);
     },
     numbers: function() {
       return parseFloat(this.value.replace(/[^0-9.-]+/g, ""));
@@ -223,10 +234,10 @@
         }
       }
       underscored = underscored.join("");
-      return underscored.replace(/^_?/, "");
+      return chainable(underscored.replace(/^_?/, ""));
     },
     camel: function() {
-      return f(f(this.value).underscore()).titleize().replace(RegExp(" ", "g"), "");
+      return chainable(f(this.value).underscore().titleize().replace(RegExp(" ", "g"), ""));
     },
     humanize: function() {
       var ch, humanized;
@@ -237,37 +248,41 @@
       }
       humanized = humanized.join("").split("_");
       humanized[0] = f(humanized[0]).capitalize();
-      return humanized.join(" ").trim();
+      return chainable(humanized.join(" ").trim());
     },
     pluralize: function() {
       var i, r;
-      if (rules.uncountable.indexOf(this.value) > 0) return this.value;
+      if (rules.uncountable.indexOf(this.value) > 0) return chainable(this.value);
       i = rules.irregular.length;
       while (i > 0) {
         r = rules.irregular[i - 1];
-        if (this.value === r[0]) return r[1];
+        if (this.value === r[0]) return chainable(r[1]);
         i--;
       }
       i = rules.plural.length;
       while (i > 0) {
         r = rules.plural[i - 1];
-        if (this.value.match(r[0])) return this.value.replace(r[0], r[1]);
+        if (this.value.match(r[0])) {
+          return chainable(this.value.replace(r[0], r[1]));
+        }
         i--;
       }
     },
     singularize: function() {
       var i, r;
-      if (rules.uncountable.indexOf(this.value) > 0) return this.value;
+      if (rules.uncountable.indexOf(this.value) > 0) return chainable(this.value);
       i = rules.irregular.length;
       while (i > 0) {
         r = rules.irregular[i - 1];
-        if (this.value === r[1]) return r[0];
+        if (this.value === r[1]) return chainable(r[0]);
         i--;
       }
       i = rules.singular.length;
       while (i > 0) {
         r = rules.singular[i - 1];
-        if (this.value.match(r[0])) return this.value.replace(r[0], r[1]);
+        if (this.value.match(r[0])) {
+          return chainable(this.value.replace(r[0], r[1]));
+        }
         i--;
       }
     },
@@ -285,7 +300,7 @@
         (options[prop] !== void 0) || (options[prop] = defaults[prop]);
       }
       if (!this.value) {
-        return options.defaults;
+        return chainable(options.defaults);
       } else {
         val = parseFloat(this.value);
         sign = (val < 0 ? "-" : "");
@@ -294,13 +309,13 @@
         first = sign + options.symbol + (j ? i.substr(0, j) + options.seperator : "");
         middle = i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + options.seperator);
         last = (options.precision ? options.dot + Math.abs(val - i).toFixed(options.precision).slice(2) : "");
-        return first + middle + last;
+        return chainable(first + middle + last);
       }
     },
     number: function(opts) {
       opts = opts || {};
       opts.symbol = "";
-      return f(this.value).money(opts);
+      return chainable(f(this.value).money(opts));
     },
     titleize: function() {
       var parts, word;
@@ -314,7 +329,7 @@
         }
         return _results;
       })();
-      return parts.join(" ");
+      return chainable(parts.join(" "));
     },
     isBlank: function() {
       var clean;
@@ -336,7 +351,7 @@
         }
         return _results;
       }).call(this);
-      return parts.join("") + tail;
+      return chainable(parts.join("") + tail);
     }
   };
 

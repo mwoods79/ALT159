@@ -72,6 +72,18 @@ inflect.irregular('zombie', 'zombies')
 inflect.uncountable(['equipment','information','rice','money','species','series','fish','sheep','jeans','bacon'])
 
 
+#add all of Stringys functions onto a new String
+chainable = (str) ->
+  str = new String(str)
+  addFunction = (obj, func, key) ->
+    obj[key] = ->
+      func.apply
+        value: this.toString()
+      , arguments
+  for key of Stringy::
+    addFunction str, Stringy::[key], key  #unless str[key]
+  str.end = -> this.toString()
+  str
 
 
 Stringy = (obj) ->
@@ -82,12 +94,11 @@ Stringy:: =
     return @value if(@value is '')
     lowerCased = @value.toLowerCase()
     word = lowerCased[0].toUpperCase() + lowerCased.substring(1)
-    return word
+    chainable(word)
 
   # Returns only the numbers out of a string
   numbers: ->
     parseFloat(@value.replace(/[^0-9.-]+/g, ""))
-    #return isNaN(n) ? null : n
 
   underscore: ->
     underscored = []
@@ -95,10 +106,11 @@ Stringy:: =
       underscored.push "_"  if ch isnt 0 and @value[ch].match(/[A-Z|\s]/)
       underscored.push @value[ch].toLowerCase()  unless @value[ch].match(/\s/)
     underscored = underscored.join ""
-    underscored.replace(/^_?/,"")
+    chainable underscored.replace(/^_?/,"")
 
   camel: ->
-    f(f(@value).underscore()).titleize().replace(RegExp(" ","g"), "")
+    #f(f(@value).underscore()).titleize().replace(RegExp(" ","g"), "")
+    chainable f(@value).underscore().titleize().replace(RegExp(" ","g"), "")
 
   humanize: ->
     humanized = []
@@ -107,32 +119,32 @@ Stringy:: =
       humanized.push @value[ch]  unless @value[ch].match(/\-/)
     humanized = humanized.join("").split("_")
     humanized[0] = f(humanized[0]).capitalize()
-    humanized.join(" ").trim()
+    chainable humanized.join(" ").trim()
 
   pluralize: ->
-    return @value  if rules.uncountable.indexOf(@value) > 0
+    return chainable @value if rules.uncountable.indexOf(@value) > 0
     i = rules.irregular.length
     while i > 0
       r = rules.irregular[i - 1]
-      return r[1]  if @value is r[0]
+      return chainable r[1]  if @value is r[0]
       i--
     i = rules.plural.length
     while i > 0
       r = rules.plural[i - 1]
-      return @value.replace(r[0], r[1])  if @value.match(r[0])
+      return chainable @value.replace(r[0], r[1])  if @value.match(r[0])
       i--
 
   singularize: ->
-    return @value  if rules.uncountable.indexOf(@value) > 0
+    return chainable @value  if rules.uncountable.indexOf(@value) > 0
     i = rules.irregular.length
     while i > 0
       r = rules.irregular[i - 1]
-      return r[0]  if @value is r[1]
+      return chainable r[0] if @value is r[1]
       i--
     i = rules.singular.length
     while i > 0
       r = rules.singular[i - 1]
-      return @value.replace(r[0], r[1])  if @value.match(r[0])
+      return chainable @value.replace(r[0], r[1])  if @value.match(r[0])
       i--
 
   money: (options) ->
@@ -146,7 +158,7 @@ Stringy:: =
     for prop of defaults
       (options[prop] isnt undefined) or (options[prop] = defaults[prop])
     unless @value
-      options.defaults 
+      chainable options.defaults 
     else
       val = parseFloat(@value)
       sign = (if val < 0 then "-" else "")
@@ -155,17 +167,17 @@ Stringy:: =
       first = (sign + options.symbol + (if j then i.substr(0, j) + options.seperator else ""))
       middle = i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + options.seperator)
       last = (if options.precision then options.dot + Math.abs(val - i).toFixed(options.precision).slice(2) else "")
-      first + middle + last
+      chainable( first + middle + last )
 
   number: (opts) ->
     opts = opts or {}
     opts.symbol = ""
-    f(@value).money opts
+    chainable( f(@value).money opts )
 
   titleize: ->
     parts = @value.split RegExp('[ _]')
     parts = (f(word).capitalize() for word in parts)
-    parts.join " "
+    chainable parts.join " "
 
   isBlank: ->
     clean = @value || ""
@@ -175,7 +187,7 @@ Stringy:: =
   truncate: (amount, tail="...")->
     parts = []
     parts = (str for str in @value when _i < amount)
-    parts.join("") + tail
+    chainable parts.join("") + tail
 
 
 

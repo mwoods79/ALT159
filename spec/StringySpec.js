@@ -1,5 +1,27 @@
 describe("Stringy", function() {
 
+
+  //NOTE: must test before extending prototypes
+  describe("Chain",function(){
+
+    it("should equal the original", function(){
+      subject = f("Stringtest").capitalize()
+      expect(subject).toEqual("Stringtest");
+    });
+
+    it("should add functions", function(){
+      subject = f("Stringtest").capitalize()
+      expect(subject.underscore !== void 0).toBeTruthy()
+    });
+
+    it("should not alter the prototypes", function(){
+      subject = f("Stringtest").capitalize()
+      expect(String.prototype.underscore === void 0).toBeTruthy()
+    });
+
+  });
+
+
   describe("capitalize", function() {
 
     it("should capitalize the stirng", function() {
