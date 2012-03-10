@@ -1,1 +1,196 @@
-My GitHub Page
+<!DOCTYPE>
+<html>
+  <head>
+    <title>ALT159.js</title>
+    <link href='http://fonts.googleapis.com/css?family=Buenard&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+    <style>
+      /* color theme: #7D2A35  #CC9258  #917A56  #B4BA6C  #FEFFC2 */
+
+      html                { background-color:#917A56}
+      .nav                { background-color:#CC9258}
+      .functions > div    { background-color:#7D2A35}
+      .example            { background-color:#B4BA6C}
+      h1                  { 
+                            background-color:#7D2A35;
+                            background: -moz-linear-gradient(top, #a53845 0%, #7d2a35 100%);
+                            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a53845), color-stop(100%,#7d2a35));
+                            background: -webkit-linear-gradient(top, #a53845 0%,#7d2a35 100%);
+                            background: -o-linear-gradient(top, #a53845 0%,#7d2a35 100%);
+                            background: -ms-linear-gradient(top, #a53845 0%,#7d2a35 100%);
+                            background: linear-gradient(top, #a53845 0%,#7d2a35 100%);
+                            background-color:#7D2A35
+      }
+
+      .functions > div,
+      .example            { border:1px solid #333}
+      body                { color:#FEFFC2}
+      .example            { color:#7D2A35}
+      a, a:visited        { color:#FEFFC2}
+      a:hover             { color:#7D2A35}
+      a                   { text-decoration:none}
+      .nav a              { display:inline-block}
+      h1                  { text-shadow:5px 5px 2px #333}
+      h2                  { text-shadow:3px 3px 2px #333}
+      .nav a              { line-height:1.5em }
+      body,h1,h2          { font-family: 'Buenard', serif; }
+      h1                  { font-style:italic}
+      html,.group         { font-size:1.5em}
+      .nav                { font-size:1.2em}
+      h1                  { font-size:8em}
+      h2                  { font-size:0.9em}
+      h1                  { padding:0.1em}
+      .functions > div    { padding:1em}
+      h1                  { padding-left:0.4em}
+      h1                  { padding-bottom:0.2em}
+      .nav,.about,
+      .functions .example { padding:1em}
+      body                { margin:0}
+      h1                  { margin:0}
+      .content            { margin-left:14em}
+      .group,h3           { margin-left:-0.5em}
+      .example            { margin-top:0.5em}
+      .functions > div    { margin-right:1em}
+      .functions > div    { margin-bottom:1em}
+      h4                  { margin:0 0 0.5em -0.5em}
+      h2                  { position:absolute}
+      .nav.fixed          { position:fixed}
+      .nav.fixed          { top:0}
+      .nav.fixed          { bottom:0}
+      h2                  { top:8em}
+      h2                  { left:18em}
+      .nav                { float:left}
+      .nav                { height:30em}
+      .nav.fixed          { height:auto}
+      .nav                { width:8em}
+      .nav                { overflow-y:scroll}
+      .nav                { overflow-x:hidden}
+      h1                  { box-shadow:3px 3px 3px #333}
+      .functions > div    { box-shadow:3px 3px 3px #333}
+      .functions > div,
+      .example            { border-radius: 5px}
+      .example            { box-shadow:inset 2px 2px 2px #333}
+
+
+    </style>
+  </head>
+  <body>
+    <h1>ƒ( )</h1>
+    <h2>ALT159.js - A Javascript library for basic types</h2>
+    <div class='nav' id='nav'>
+
+      <a class='group' href='#string' >String</a>
+      <a href='#capitalize'           >.capitalize()</a>
+      <a href='#numbers'              >.numbers()</a>
+      <a href='#format'               >.format(x)</a>
+      <a href='#underscore'           >.underscore()</a>
+      <a href='#humanize'             >.humanize()</a>
+      <a href='#pluralize'            >.pluralize()</a>
+      <a href='#singularize'          >.singularize()</a>
+
+    </div>
+    <div class='content'>
+
+      <div class='about'>
+        <p>If you have ever worked with javascript, you probable found the methods on basic type lacking. ALT159 aims to fix this providing a simple to use collection of functions for your basic type.</p>
+        <p>ALT159 can be accessed by using the Javascrpit Function ALT159() or one of its two shortcuts f() or the windows key combination ALT+159 
+          to get =&gt; ƒ</p>
+        <p>All source code for ALT159 can be found on <a href='https://github.com/mwoods79/ALT159'>Github</a> </p>
+      </div>
+
+
+      <div class='functions'>
+        <h3 id='string'>String functions</h3>
+
+        <div id="capitalize">
+          <h4>capitalize</h4>
+          <div>capitalize the words in a string</div>
+          <div class='example'>ƒ('bacon').capitalize() =&gt; 'Bacon'</div>
+        </div>
+
+        <div id="numbers">
+          <h4>numbers</h4>
+          <div>returns only the number in a string</div>
+          <div class='example'>ƒ('the meening of life: 42').numbers() =&gt; 42</div>
+        </div>
+
+        <div id="format">
+          <h4>format</h4>
+          <div>a C style format method</div>
+          <div class='example'>ƒ('my name is {0}').format('Blarg') =&gt; 'my name is Blarg'</div>
+        </div>
+
+        <div id="underscore">
+          <h4>underscore</h4>
+          <div>formats a string with underscores</div>
+          <div class='example'>ƒ('HoneyBadger dont care').underscore() =&gt; 'honey_badger_dont_care'</div>
+        </div>
+
+        <div id="humanize">
+          <h4>humanize</h4>
+          <div>converts a string to be read by a human</div>
+          <div class='example'>
+            ƒ('FluxCapacitor').humanize() =&gt; 'Flux Capacitor'
+            <br>
+            ƒ('1.21_giga_watts').humanize() =&gt; '1.21 giga watts'
+          </div>
+        </div>
+
+        <div id="pluralize">
+          <h4>pluralize</h4>
+          <div>takes a word and pluralizes it</div>
+          <div class='example'>
+            ƒ('person').pluralize() =&gt; 'people'
+            <br>
+            ƒ('Jelly Bean').pluralize() =&gt; 'Jelly Beans'
+            <br>
+            ƒ('mouse').pluralize() =&gt; 'mice'
+            <br>
+            ƒ('rice').pluralize() =&gt; 'rice'
+          </div>
+        </div>
+
+        <div id="singularize">
+          <h4>singularize</h4>
+          <div>takes a word and singularizes it</div>
+          <div class='example'>
+            ƒ('kine').singularize() =&gt; 'cow'
+            <br>
+            ƒ('women').singularize() =&gt; 'woman'
+            <br>
+            ƒ('matches').singularize() =&gt; 'match'
+            <br>
+            ƒ('goats').singularize() =&gt; 'goat'
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </body>
+
+
+  <script type="text/javascript" src="src/ALT159.js"></script>
+
+  <script type='text/javascript'>
+    (function(){
+     var nav = document.getElementById('nav');
+     var html = document.getElementsByTagName('html')[0];
+     var body = document.getElementsByTagName('body')[0];
+     var onScroll = function(e){
+       if(html.scrollTop >= 308 || body.scrollTop >= 308)
+         nav.className = "nav fixed";
+       else
+         nav.className = "nav";
+     };
+     if( document.addEventListener != void 0)
+       document.addEventListener("scroll", onScroll, true);
+     else
+       window.onscroll = onScroll;
+       //#document.attachEvent("onscroll", onScroll);
+
+     })();
+  </script>
+
+</html>
+
