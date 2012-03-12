@@ -81,12 +81,15 @@
 
       <a class='group' href='#string' >String</a>
       <a href='#capitalize'           >.capitalize()</a>
+      <a href='#number'               >.number()</a>
       <a href='#numbers'              >.numbers()</a>
-      <a href='#format'               >.format(x)</a>
+      <a href='#camel'                >.camel()</a>
       <a href='#underscore'           >.underscore()</a>
       <a href='#humanize'             >.humanize()</a>
+      <a href='#titleize'             >.titleize()</a>
       <a href='#pluralize'            >.pluralize()</a>
       <a href='#singularize'          >.singularize()</a>
+      <a href='#money'                >.money()</a>
 
     </div>
     <div class='content'>
@@ -108,16 +111,22 @@
           <div class='example'>ƒ('bacon').capitalize() =&gt; 'Bacon'</div>
         </div>
 
+        <div id="number">
+          <h4>number</h4>
+          <div>a user pretty version of a number</div>
+          <div class='example'>ƒ('2718281828').number() =&gt; 2,718,281,828</div>
+        </div>
+
         <div id="numbers">
           <h4>numbers</h4>
           <div>returns only the number in a string</div>
           <div class='example'>ƒ('the meening of life: 42').numbers() =&gt; 42</div>
         </div>
 
-        <div id="format">
-          <h4>format</h4>
-          <div>a C style format method</div>
-          <div class='example'>ƒ('my name is {0}').format('Blarg') =&gt; 'my name is Blarg'</div>
+        <div id="camel">
+          <h4>camel</h4>
+          <div>Camel Case a string</div>
+          <div class='example'>ƒ('i am a camel').format() =&gt; 'IAmACamel'</div>
         </div>
 
         <div id="underscore">
@@ -133,6 +142,14 @@
             ƒ('FluxCapacitor').humanize() =&gt; 'Flux Capacitor'
             <br>
             ƒ('1.21_giga_watts').humanize() =&gt; '1.21 giga watts'
+          </div>
+        </div>
+
+        <div id="titleize">
+          <h4>titleize</h4>
+          <div>capitalize all the words in a string</div>
+          <div class='example'>
+            ƒ('capitalize all the words').titleize() =&gt; 'Capitalize All The Words'
           </div>
         </div>
 
@@ -164,13 +181,33 @@
           </div>
         </div>
 
+        <div id="money">
+          <h4>money</h4>
+          <div>formats a string of numbers for displaying as money</div>
+          <div class='example'>
+            ƒ('3.50').money() =&gt; $3.50
+            <br>
+            ƒ('1024').money() =&gt; $1,024.00
+            <br>
+            ƒ('1024').money({symbol:'&#8356'}) =&gt; &#8356 1,024.00
+          </div>
+          <div class='example'>
+            <h4>options:</h4>
+            <div>precision: 2</div>
+            <div>symbol: "$"</div>
+            <div>dot: "."</div>
+            <div>seperator: ","</div>
+            <div>"default": "-"</div>
+          </div>
+        </div>
+
       </div>
 
     </div>
   </body>
 
 
-  <script type="text/javascript" src="src/ALT159.js"></script>
+  <script type="text/javascript" src="ALT159.js"></script>
 
   <script type='text/javascript'>
     (function(){
