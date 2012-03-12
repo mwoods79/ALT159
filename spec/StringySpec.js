@@ -19,6 +19,16 @@ describe("Stringy", function() {
       expect(String.prototype.underscore === void 0).toBeTruthy()
     });
 
+    it("should be chainable", function(){
+      subject = f("i am a string").underscore().capitalize()
+      expect(subject).toEqual("I_am_a_string");
+    });
+
+    it("should be able to end the chain", function(){
+      subject = f("i am a string").underscore().capitalize().end()
+      expect(subject === "I_am_a_string").toBeTruthy();
+    });
+
   });
 
 
